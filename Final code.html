@@ -43,7 +43,7 @@ layout: page
 	<tr>
 	  <td>Here is where your proteins can be found:</td>
 	  <td> <!-- now column that will have images imported -->
-	    <img id="basic" src="/assets/Pictures/BasicCell.jpg" alt="BasicCell" width="369" height="282"> <!-- image id (naming the image in the code), src (where you are getting the image from), alt (what text will appear in case the image is not loaded), width and height (restricting image sizes - for table formatting) --> 
+	    <img id="basic" src="/assets/Pictures/BasicCell.jpg" alt="BasicCell" width="369" height="282"> <!-- image id (image identifier), src (where you are getting the image from), alt (what text will appear in case the image is not loaded), width and height (restricting image sizes - for table formatting) --> 
 	    <img id="wd:Q40260" src="/assets/Pictures/NucleusLabel.jpg" alt="NucleusInCell" width="369" height="282">
 	    <img id="wd:Q39572" src="/assets/Pictures/MitochondriaLabel.jpg" alt="MitochondriaInCell" width="369" height="282">
 	    <img id="wd:Q79899" src="/assets/Pictures/CytoplasmLabel.jpg" alt="CytoplasmInCell" width="369" height="282">
@@ -57,7 +57,7 @@ layout: page
 	<tr>
 	  <td>Choose a type of regulation:</td>
 	  <td>
-	    <select class="label grey"name="type" id="type">
+	    <select class="label grey"name="type" id="type"> <!-- drop-down list with multiple options for type of regulation -->
 	      <option value="blank">- select -</option>
 	      <option value="wd:Q14907008">Upregulated</option>
 	      <option value="wd:Q14906419">Downregulated</option>
@@ -67,16 +67,16 @@ layout: page
       </tbody>
     </table>
   <p>
-    <input id="submit" type="button" class="label grey" value="List Proteins">
+    <input id="submit" type="button" class="label grey" value="List Proteins"> <!-- creating the submit button, class is relating back to mystyle.css, value is text on the button -->
   </p>	
   </div>
 
   <div>
-    <ol id="list_of_proteins">
+    <ol id="list_of_proteins"> <!-- creating ordered list, populated by proteins -->
     </ol>
   </div>
 	
-  <script>
+  <script> <!-- tag used to embed JavaScript -->
     // Error codes in case the user has not entered a correct response, followed by the SPARQL query
     $("#submit").click(async function() {
       $("#list_of_proteins").empty();

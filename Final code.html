@@ -21,13 +21,13 @@ layout: page
     <h2>Search for the proteins!</h2>
     <p>
     <!-- Create table -->
-    <table class="search">
+    <table class="search"> <!-- refering to mystyle.css, template for the table -->
       <tbody>
         <!-- First row of the table -->
 	<tr>
 	  <td>Choose a location in the cell:</td>
 	  <td>    
-	    <select class="label grey" name="locations" id="locations">
+	    <select class="label grey" name="locations" id="locations"> <!-- select calss of label grey which its own attribute in the mystyle.css file, we refer to locations later in sparql query, select class also creates drop down menu -->
 	      <option value="basic">- select -</option>
 	      <option value="wd:Q40260">Nucleus</option>
 	      <option value="wd:Q39572">Mitochondria</option>
@@ -42,8 +42,8 @@ layout: page
 	<!-- Second row of the table, imports all the necessary images -->
 	<tr>
 	  <td>Here is where your proteins can be found:</td>
-	  <td>
-	    <img id="basic" src="/assets/Pictures/BasicCell.jpg" alt="BasicCell" width="369" height="282">  
+	  <td> <!-- now column that will have images imported -->
+	    <img id="basic" src="/assets/Pictures/BasicCell.jpg" alt="BasicCell" width="369" height="282"> <!-- image id (naming the image in the code), src (where you are getting the image from), alt (what text will appear in case the image is not loaded), width and height (restricting image sizes - for table formatting) --> 
 	    <img id="wd:Q40260" src="/assets/Pictures/NucleusLabel.jpg" alt="NucleusInCell" width="369" height="282">
 	    <img id="wd:Q39572" src="/assets/Pictures/MitochondriaLabel.jpg" alt="MitochondriaInCell" width="369" height="282">
 	    <img id="wd:Q79899" src="/assets/Pictures/CytoplasmLabel.jpg" alt="CytoplasmInCell" width="369" height="282">

@@ -41,11 +41,11 @@ table.search tr:nth-child(even) {  /* space between the border and the text */
   background: white;
 }
 
-.label { /* for select buttons */
+.label { /* drop-down menu for regulation */
   color: black;
   padding: 8px;
 }
-.grey { /* for select buttons */
+.grey { /* drop-down menu for proteins */
   font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; 
   ont-size: 16px; 
   background-color: #DCDCDC; 

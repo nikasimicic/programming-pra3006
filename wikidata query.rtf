@@ -1,0 +1,17 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 SELECT ?proteinLink ?proteinLinkLabel ?goBioprocessLabel ?goLocationLabel\
+		WHERE \{\
+		?proteinLink wdt:P31 wd:Q8054.\
+		?proteinLink wdt:P703 wd:Q15978631.\
+		 VALUES ?goBioprocess \{wd:Q14907008 wd:Q14906419\}.\
+		?proteinLink wdt:P682 ?goBioprocess.\
+		VALUES ?goLocation \{wd:Q40260 wd:Q39572 wd:Q79899 wd:Q220599 wd:Q14349455 wd:Q79927 wd:Q83181 wd:Q178355\}.\
+		?proteinLink wdt:P681 ?goLocation.\
+		SERVICE wikibase:label \{ bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". \}\
+		\}}

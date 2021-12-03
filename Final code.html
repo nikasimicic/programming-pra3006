@@ -6,12 +6,12 @@ layout: page
 <head>
   <!-- Set-up for the title -->
   <h1 class="header">Proteins involved in cellular senescence</h1>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <!-- importing the JQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <!-- Initialize a global WBK function -->
-  <script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikibase-sdk.min.js"></script> <!-- imports the Wikibase SDK, the library that encapsulates all the functionalities related to querying Wikidata and getting simplified results from it -->
+  <script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikibase-sdk.min.js"></script>
   <!-- Initialize a global wdk object using the WBK object -->
-  <script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikidata-sdk.min.js"></script> <!-- script that initializes the WBK object with parameters and assign it to the variable "wdk" (used in the rest of your code), prepares the WBK object with the necessary parameters and make it ready for you through the "wdk" variable -->
-  <link rel="stylesheet" href="/assets/css/mystyle.css"> <!-- linking to external style sheets in css -->
+  <script src="https://cdn.rawgit.com/maxlath/wikidata-sdk/dist/dist/wikidata-sdk.min.js"></script>
+  <link rel="stylesheet" href="/assets/css/mystyle.css">
 </head>
 	
 <body>
@@ -21,13 +21,13 @@ layout: page
     <h2>Search for the proteins!</h2>
     <p>
     <!-- Create table -->
-    <table class="search"> <!-- refering to mystyle.css, template for the table -->
+    <table class="search">
       <tbody>
         <!-- First row of the table -->
 	<tr>
 	  <td>Choose a location in the cell:</td>
 	  <td>    
-	    <select class="label grey" name="locations" id="locations"> <!-- select calss of label grey which its own attribute in the mystyle.css file, we refer to locations later in sparql query, select class also creates drop down menu -->
+	    <select class="label grey" name="locations" id="locations">
 	      <option value="basic">- select -</option>
 	      <option value="wd:Q40260">Nucleus</option>
 	      <option value="wd:Q39572">Mitochondria</option>
@@ -42,8 +42,8 @@ layout: page
 	<!-- Second row of the table, imports all the necessary images -->
 	<tr>
 	  <td>Here is where your proteins can be found:</td>
-	  <td> <!-- now column that will have images imported -->
-	    <img id="basic" src="/assets/Pictures/BasicCell.jpg" alt="BasicCell" width="369" height="282"> <!-- image id (image identifier), src (where you are getting the image from), alt (what text will appear in case the image is not loaded), width and height (restricting image sizes - for table formatting) --> 
+	  <td>
+	    <img id="basic" src="/assets/Pictures/BasicCell.jpg" alt="BasicCell" width="369" height="282">  
 	    <img id="wd:Q40260" src="/assets/Pictures/NucleusLabel.jpg" alt="NucleusInCell" width="369" height="282">
 	    <img id="wd:Q39572" src="/assets/Pictures/MitochondriaLabel.jpg" alt="MitochondriaInCell" width="369" height="282">
 	    <img id="wd:Q79899" src="/assets/Pictures/CytoplasmLabel.jpg" alt="CytoplasmInCell" width="369" height="282">
@@ -57,7 +57,7 @@ layout: page
 	<tr>
 	  <td>Choose a type of regulation:</td>
 	  <td>
-	    <select class="label grey"name="type" id="type"> <!-- drop-down list with multiple options for type of regulation -->
+	    <select class="label grey"name="type" id="type">
 	      <option value="blank">- select -</option>
 	      <option value="wd:Q14907008">Upregulated</option>
 	      <option value="wd:Q14906419">Downregulated</option>
@@ -67,21 +67,21 @@ layout: page
       </tbody>
     </table>
   <p>
-    <input id="submit" type="button" class="label grey" value="List Proteins"> <!-- creating the submit button, class is relating back to mystyle.css, value is text on the button -->
+    <input id="submit" type="button" class="label grey" value="List Proteins">
   </p>	
   </div>
 
   <div>
-    <ol id="list_of_proteins"> <!-- creating ordered list, populated by proteins -->
+    <ol id="list_of_proteins">
     </ol>
   </div>
 	
-  <script> <!-- tag used to embed JavaScript -->
+  <script>
     // Error codes in case the user has not entered a correct response, followed by the SPARQL query
-    $("#submit").click(async function() { // when you click the submit button it will execute the function asynchronously 
-      $("#list_of_proteins").empty(); // setting the list of proteins to be empty
-      const location = $('#locations').val(); // defining the constants used in JQuery, set equal to HTML element locations defined before
-      const type = $('#type').val(); 
+    $("#submit").click(async function() {
+      $("#list_of_proteins").empty();
+      const location = $('#locations').val();
+      const type = $('#type').val();
 
         if (type == "blank" && location == "basic")
           $("#list_of_proteins").text("Error: You did not select a location or a type of regulation.");
@@ -94,20 +94,20 @@ layout: page
 
         // Wikidata query to retrieve protein information    
         else {
-          const wdquery = `SELECT ?proteinLink ?proteinLinkLabel # creates a variable called "wdquery" and stores the whole sparql query in it (spanning multiple lines)
+          const wdquery = `SELECT ?proteinLink ?proteinLinkLabel
             WHERE {
-              ?proteinLink wdt:P31 wd:Q8054. # instance of protein 
-              ?proteinLink wdt:P703 wd:Q15978631. # found in taxon homo sapiens
-              VALUES ?goBioprocess {${type}}. # search for values of goBioprocess and store it in variable type, positive or negative regulation of cellular senesence
-              ?proteinLink wdt:P682 ?goBioprocess. # wdt:P682 = biological process, proteinLink (proteins) which needs to be related homo sapines also needs to be involved in biological process
-              VALUES ?goLocation {${location}}. 
+              ?proteinLink wdt:P31 wd:Q8054.
+              ?proteinLink wdt:P703 wd:Q15978631.
+              VALUES ?goBioprocess {${type}}.
+              ?proteinLink wdt:P682 ?goBioprocess.
+              VALUES ?goLocation {${location}}.
               ?proteinLink wdt:P681 ?goLocation.
-              SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } #default language is English
+              SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
             }`;
-          const url = wdk.sparqlQuery(wdquery) // sparqlQuery function from the "wdk" object is passed as a parameter "wdquery" and returns the URL with query encoded within it, called in next line to obtain the results, url is then stored in "url" variable
-          const response = await fetch(url) // "fetch" function is applied on the url from the previous step which will call Wikidata SPARQL endpoint, execute the query and return back the response, results are stored in the "response" variable, await = process is executed asychronously
-          const results = await response.json() // to extract the JSON body content from the Response object, json() method is used, which contains the result of parsing the response body text as JSON, JSON is stored in the "results" variable
-          const proteinList = wdk.simplify.sparqlResults(results) // simplifies the JSON response to a more practical version so it can be more easily accessed
+          const url = wdk.sparqlQuery(wdquery)
+          const response = await fetch(url)
+          const results = await response.json()
+          const proteinList = wdk.simplify.sparqlResults(results)
 
           // Statement to return an answer if you choose a location with no proteins.
           if (proteinList.length == 0)
@@ -142,14 +142,13 @@ layout: page
         document.getElementById("wd:Q79927").style.display='none';
         document.getElementById("wd:Q83181").style.display='none';
 
-        var imgId = $("#locations").val(); // creating a variable called imgId which is equal to selected location from the dropdown menu
-        document.getElementById(imgId).style.display='block'; // document method getElementById returns imageId that corresponds to the chosen image, setting it to block display 
+        var imgId = $("#locations").val();
+        document.getElementById(imgId).style.display='block';
       });	
-
-	  
+	
       // Color the button for downregulated option in red, and the option for upregulated in green
-      $("#type").change(function(){ // listener
-        var typeval = $("#type").val(); // type of regulation picked and then it will make a change, variable typeval declared 
+      $("#type").change(function(){
+        var typeval = $("#type").val();
         if (typeval == "blank"){
           document.getElementById("type").style.backgroundColor='#DCDCDC';
 	} 
@@ -161,6 +160,5 @@ layout: page
 	}
       });
   </script>
-     	
 </body>
 </html>

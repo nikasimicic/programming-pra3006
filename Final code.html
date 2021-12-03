@@ -78,10 +78,10 @@ layout: page
 	
   <script> <!-- tag used to embed JavaScript -->
     // Error codes in case the user has not entered a correct response, followed by the SPARQL query
-    $("#submit").click(async function() {
-      $("#list_of_proteins").empty();
-      const location = $('#locations').val();
-      const type = $('#type').val();
+    $("#submit").click(async function() { // when you click the submit button it will execute the function asynchronously 
+      $("#list_of_proteins").empty(); // setting the list of proteins to be empty
+      const location = $('#locations').val(); // defining the constants used in JQuery, set equal to HTML element locations defined before
+      const type = $('#type').val(); 
 
         if (type == "blank" && location == "basic")
           $("#list_of_proteins").text("Error: You did not select a location or a type of regulation.");
@@ -94,17 +94,17 @@ layout: page
 
         // Wikidata query to retrieve protein information    
         else {
-          const wdquery = `SELECT ?proteinLink ?proteinLinkLabel
+          const wdquery = `SELECT ?proteinLink ?proteinLinkLabel # creates a variable called "wdquery" and stores the whole sparql query in it
             WHERE {
-              ?proteinLink wdt:P31 wd:Q8054.
-              ?proteinLink wdt:P703 wd:Q15978631.
-              VALUES ?goBioprocess {${type}}.
-              ?proteinLink wdt:P682 ?goBioprocess.
-              VALUES ?goLocation {${location}}.
+              ?proteinLink wdt:P31 wd:Q8054. # instance of protein 
+              ?proteinLink wdt:P703 wd:Q15978631. # found in taxon homo sapiens
+              VALUES ?goBioprocess {${type}}. # search for values of goBioprocess and store it in variable type, positive or negative regulation of cellular senesence
+              ?proteinLink wdt:P682 ?goBioprocess. # wdt:P682 = biological process, proteinLink (proteins) which needs to be related homo sapines also needs to be involved in biological process
+              VALUES ?goLocation {${location}}. 
               ?proteinLink wdt:P681 ?goLocation.
-              SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+              SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } #default language is English
             }`;
-          const url = wdk.sparqlQuery(wdquery)
+          const url = wdk.sparqlQuery(wdquery) # 
           const response = await fetch(url)
           const results = await response.json()
           const proteinList = wdk.simplify.sparqlResults(results)

@@ -101,7 +101,7 @@ layout: page
               VALUES ?goBioprocess {${type}}. # search for values of goBioprocess and store it in variable type, positive or negative regulation of cellular senesence
               ?proteinLink wdt:P682 ?goBioprocess. # wdt:P682 = biological process, proteinLink (proteins) which needs to be related homo sapines also needs to be involved in biological process
               VALUES ?goLocation {${location}}. 
-              ?proteinLink wdt:P681 ?goLocation.
+              ?proteinLink wdt:P681 ?goLocation. # P681 cell component
               SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } #default language is English
             }`;
           const url = wdk.sparqlQuery(wdquery) // sparqlQuery function from the "wdk" object is passed as a parameter "wdquery" and returns the URL with query encoded within it, called in next line to obtain the results, url is then stored in "url" variable

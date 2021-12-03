@@ -94,7 +94,7 @@ layout: page
 
         // Wikidata query to retrieve protein information    
         else {
-          const wdquery = `SELECT ?proteinLink ?proteinLinkLabel # creates a variable called "wdquery" and stores the whole sparql query in it
+          const wdquery = `SELECT ?proteinLink ?proteinLinkLabel # creates a variable called "wdquery" and stores the whole sparql query in it (spanning multiple lines)
             WHERE {
               ?proteinLink wdt:P31 wd:Q8054. # instance of protein 
               ?proteinLink wdt:P703 wd:Q15978631. # found in taxon homo sapiens
@@ -104,10 +104,10 @@ layout: page
               ?proteinLink wdt:P681 ?goLocation.
               SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". } #default language is English
             }`;
-          const url = wdk.sparqlQuery(wdquery) # 
-          const response = await fetch(url)
-          const results = await response.json()
-          const proteinList = wdk.simplify.sparqlResults(results)
+          const url = wdk.sparqlQuery(wdquery) // sparqlQuery function from the "wdk" object is passed as a parameter "wdquery" and returns the URL with query encoded within it, called in next line to obtain the results, url is then stored in "url" variable
+          const response = await fetch(url) // "fetch" function is applied on the url from the previous step which will call Wikidata SPARQL endpoint, execute the query and return back the response, results are stored in the "response" variable, await = process is executed asychronously
+          const results = await response.json() // to extract the JSON body content from the Response object, json() method is used, which contains the result of parsing the response body text as JSON, JSON is stored in the "results" variable
+          const proteinList = wdk.simplify.sparqlResults(results) // simplifies the JSON response to a more practical version so it can be more easily accessed
 
           // Statement to return an answer if you choose a location with no proteins.
           if (proteinList.length == 0)

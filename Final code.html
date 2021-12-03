@@ -142,14 +142,14 @@ layout: page
         document.getElementById("wd:Q79927").style.display='none';
         document.getElementById("wd:Q83181").style.display='none';
 
-        var imgId = $("#locations").val();
-        document.getElementById(imgId).style.display='block';
+        var imgId = $("#locations").val(); // creating a variable called imgId which is equal to selected location from the dropdown menu
+        document.getElementById(imgId).style.display='block'; // document method getElementById returns imageId that corresponds to the chosen image, setting it to block display 
       });	
 
 	  
       // Color the button for downregulated option in red, and the option for upregulated in green
-      $("#type").change(function(){
-        var typeval = $("#type").val();
+      $("#type").change(function(){ // listener
+        var typeval = $("#type").val(); // type of regulation picked and then it will make a change, variable typeval declared 
         if (typeval == "blank"){
           document.getElementById("type").style.backgroundColor='#DCDCDC';
 	} 
